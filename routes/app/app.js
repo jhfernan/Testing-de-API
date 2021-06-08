@@ -17,7 +17,7 @@ router.get('/', function(req, res, next) {
 	res.json(message)
 })
 
-// Home page
+// Status page
 router.get('/api_status', function(req, res, next) {
 	res.json(messageTwo)
 })

@@ -1,5 +1,5 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express')
+const router = express.Router()
 
 const users = [
 	{
@@ -17,4 +17,4 @@ router.get('/users', function(req, res, next) {
 	res.json(users)
 })
 
-module.exports = router;
+module.exports = router
