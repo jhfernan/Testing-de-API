@@ -8,8 +8,8 @@ const message = {
 }
 
 const messageTwo = {
-	site: 'active',
-	status: 'ok'
+	site: 'under construction',
+	status: 'closed'
 }
 
 // Home page

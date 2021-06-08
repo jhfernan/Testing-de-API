@@ -9,6 +9,10 @@ const users = [
 	{
 		name: 'Jon Fernandes',
 		email: 'jon.fernandes@intoolligent.com'
+	},
+	{
+		name: 'Jon Fei',
+		email: 'jon.fei@intoolligent.com'
 	}
 ]
 
