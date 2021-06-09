@@ -21,8 +21,8 @@ const items = [
 		size: '44mm',
 		series: '5',
 		color: 'Space Gray',
-		band_color: 'Black',
-		band_material: 'Florelolastimer'
+		bandColor: 'Black',
+		bandMaterial: 'Florelolastimer'
 	}
 ]
 
