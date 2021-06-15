@@ -2,6 +2,7 @@ const router = require('express').Router()
 const jwt = require('jsonwebtoken')
 
 const auth = require('../../middleware/auth')
+const config = require('../../config')
 const util = require('../../middleware/utilities')
 
 const users = [
@@ -47,7 +48,7 @@ router.route('/api/authenticate')
 		next(util.error(403, 'Bad credentials/Please check you email and password'))
 	} else if (user.password == req.body.password) {
 		let { password, ...data } = user
-		jwt.sign(data, 'signingSecret', { expiresIn: '1d'}, (err, token) => {
+		jwt.sign(data, config.secret, { expiresIn: '1d'}, (err, token) => {
 			res.json({ token })
 		})
 	}

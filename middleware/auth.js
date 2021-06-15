@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken')
 
+const config = require('../config')
 const util = require('./utilities')
 
 const auth = {
@@ -11,7 +12,7 @@ const auth = {
 
 		if (token) {
 			// Decode Token and add to res
-			jwt.verify(token, 'signingSecret', (err, decoded) => {
+			jwt.verify(token, config.secret, (err, decoded) => {
 				if (err) {
 					next(util.error(403, 'Token is not valid'))
 				}
