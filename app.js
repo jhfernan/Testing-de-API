@@ -27,14 +27,19 @@ app.use(function(req, res, next) {
 
 // error handler
 app.use(function(err, req, res, next) {
-	// set locals, only providing error in development
-	res.locals.message = err.message
-	res.locals.error = req.app.get('env') === 'development' ? err : {}
-	let status = err.status || 500
+	// Set error
+	let error = {
+		status: err.status || 500,
+		message: err.message || 'Internal server error'
+	}
+
+	// Dev console
+	if (error.status == 500) {
+		console.log('FROM app.js ERROR HANDLER: ', err)
+	}
 
 	// render the error page
-	res.status(status)
-	res.json({ status, message: err.message })
+	res.status(error.status).json(error)
 })
 
 module.exports = app

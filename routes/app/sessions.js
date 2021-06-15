@@ -1,6 +1,9 @@
 const router = require('express').Router()
 const jwt = require('jsonwebtoken')
 
+const auth = require('../../middleware/auth')
+const util = require('../../middleware/utilities')
+
 const users = [
 	{
 		id: 1,
@@ -14,15 +17,24 @@ const users = [
 		id: 2,
 		name: 'Jon Fei',
 		email: 'jon.fei@intoolligent.com',
-		password: 'theotherguy',
+		password: '1',
 		bio: 'The longest record for friend of awesome guy who still single',
+		admin: false
+	},
+	{
+		id: 3,
+		name: 'Sarah Fei',
+		email: 'email',
+		password: '2',
+		bio: 'Wife of the longest record for friend of awesome guy who still single',
 		admin: false
 	}
 ]
 
 router.route('/api/authenticate')
-.get(function(req, res, next) {
-	res.json({ status: 'ok'})
+.get(auth.checkToken, function(req, res, next) {
+	console.log('SESSION ROUTE - decoded', res.decoded)
+	res.json({ user: res.decoded})
 })
 .post(function(req, res, next) {
 	user = users.filter(obj => {
@@ -30,11 +42,12 @@ router.route('/api/authenticate')
 	})[0]
 
 	if (!user) {
-		next(createError(404))
+		next(util.error(404, 'User not found'))
 	} else if (user.password != req.body.password) {
-		next(createError(403))
+		next(util.error(403, 'Bad credentials/Please check you email and password'))
 	} else if (user.password == req.body.password) {
-		jwt.sign(user, 'signingSecret', { expiresIn: '1d'}, (err, token) => {
+		let { password, ...data } = user
+		jwt.sign(data, 'signingSecret', { expiresIn: '1d'}, (err, token) => {
 			res.json({ token })
 		})
 	}
