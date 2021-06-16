@@ -4,6 +4,8 @@ var path = require('path')
 var cookieParser = require('cookie-parser')
 var logger = require('morgan')
 
+const mongoose = require('mongoose')
+
 const general = require('./routes/app/index')
 const apiV1 = require('./routes/v1/index')
 
@@ -15,6 +17,25 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
+
+// Make Mongoose to MongoDB connection
+const mongooseOptions = {
+	useNewUrlParser: true,
+	useUnifiedTopology: true,
+	useFindAndModify: false,
+	useCreateIndex: true
+}
+
+mongoose.connect('mongodb://localhost/jmtesting', mongooseOptions)
+
+const db = mongoose.connection
+db.on('error', err => {
+	logError(err)
+})
+db.once('open', () => {
+	// require('./models/seed.js')
+	console.log('Connected to MongoDB!')
+})
 
 // Set routes
 app.use('/', general)

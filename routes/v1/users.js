@@ -1,6 +1,8 @@
 const express = require('express')
 const router = express.Router()
 
+const defFilter = { password: 0, __v: 0 }
+
 const users = [
 	{
 		name: 'Mike Traher',
