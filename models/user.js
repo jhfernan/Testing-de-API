@@ -30,6 +30,11 @@ const UserSchema = new mongoose.Schema({
 	// admin = False
 	// token = None
 	bio: String,
+
+	createdAt: {
+		type: Date,
+		default: Date.now
+	}
 })
 
 UserSchema.pre('save', function(next) {

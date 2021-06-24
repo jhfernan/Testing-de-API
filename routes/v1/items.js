@@ -1,6 +1,4 @@
-const express = require('express')
-const router = express.Router()
-
+const router = require('express').Router()
 
 // Items routes
 router.get('/items', function(req, res, next) {
