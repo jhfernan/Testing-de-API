@@ -1,4 +1,3 @@
-// import mongoose
 const mongoose = require('mongoose')
 
 // create an item Schema using mongoose
@@ -44,3 +43,4 @@ const ItemSchema = new mongoose.Schema({
 })
 
 const Item = mongoose.model('Item', ItemSchema)
+module.exports = Item

@@ -34,6 +34,7 @@ db.on('error', err => {
 })
 db.once('open', () => {
 	// require('./models/seed.js')
+	// require('./models/seed2.js')
 	console.log('Connected to MongoDB!')
 })
 

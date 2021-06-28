@@ -62,3 +62,4 @@ typings/
 
 # Seed data for database
 models/seed.js
+models/seed2.js
